@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\MessageNotification;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,4 +21,16 @@ Route::get('/', function () {
 Route::get('test', function () {
     event(new App\Events\StatusLiked('Someone'));
     return "Event has been sent!";
+});
+
+Route::get('/event', function() {
+    event(new MessageNotification("", "Hello there!"));
+});
+
+Route::get('/listen', function() {
+    return view('listen');
+});
+
+Route::get('/wew', function() {
+    echo 'xd';
 });

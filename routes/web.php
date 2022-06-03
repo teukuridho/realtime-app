@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\MessageNotification;
+use App\Http\Controllers\SendMessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,19 +19,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function () {
-    event(new App\Events\StatusLiked('Someone'));
-    return "Event has been sent!";
+Route::get('/send-message/{name}/{message}', [SendMessageController::class, 'index']);
+
+Route::get('/chat', function() {
+    return view('chat');
 });
 
 Route::get('/event', function() {
-    event(new MessageNotification("", "Hello there!"));
+    event(new MessageNotification("Ridho", "Hello there!"));
 });
 
 Route::get('/listen', function() {
     return view('listen');
-});
-
-Route::get('/wew', function() {
-    echo 'xd';
 });

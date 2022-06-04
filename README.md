@@ -1,4 +1,4 @@
-## About Laravel
+## About
 
 Realtime chat with Laravel and Pusher
 

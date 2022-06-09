@@ -44,26 +44,30 @@
                     
                     $('#connection-status').html("Connecting...");
 
-                    Pusher.logToConsole = true;
-
-                    pusher = new Pusher('82830840dc35127efac7', {
-                        cluster: 'ap1'
-                    });
-
-                    channel = pusher.subscribe('notification');
-
-                    channel.bind('pusher:subscription_succeeded', function(members) {
-                        $('#connection-status').html("You're connected");
-
-                        sendMessage(name, "(Connected)");
-                    });
-
-
-                    channel.bind('App\\Events\\MessageNotification', function(data) {
-                        addToChatBox(data.name, data.message);
-                    });
+                    initPusher();
                 }
             });
+
+            function initPusher()
+            {
+                Pusher.logToConsole = true;
+
+                pusher = new Pusher('82830840dc35127efac7', {
+                    cluster: 'ap1'
+                });
+
+                channel = pusher.subscribe('notification');
+
+                channel.bind('pusher:subscription_succeeded', function(members) {
+                    $('#connection-status').html("You're connected");
+                    sendMessage(name, "(Connected)");
+                });
+
+
+                channel.bind('App\\Events\\MessageNotification', function(data) {
+                    addToChatBox(data.name, data.message);
+                });
+            }
 
             function addToChatBox(name, message) {
                 $('#chat-box').append(

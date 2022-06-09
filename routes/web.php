@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\MessageNotification;
+use App\Http\Controllers\AdvancedChatController;
 use App\Http\Controllers\SendMessageController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,11 @@ Route::get('/chat', function() {
     return view('chat');
 });
 
+Route::get('/advanced-chat', [AdvancedChatController::class, 'index']);
+
+
+/////////////////////////////////////////////
+////////////////// OBSOLETE /////////////////
 Route::get('/event', function() {
     event(new MessageNotification("Ridho", "Hello there!"));
 });

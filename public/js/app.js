@@ -5324,8 +5324,12 @@ Vue.component('example-component', (__webpack_require__(/*! ./components/Example
 var app = new Vue({
   el: '#app',
   created: function created() {
+    window.console.log('Hello world');
     Echo.channel('notification').listen('MessageNotification', function (e) {
+      console.log(e);
       alert("Well");
+      alert(e);
+      console.log("oi");
     });
   }
 });

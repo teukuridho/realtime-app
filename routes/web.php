@@ -3,6 +3,7 @@
 use App\Events\MessageNotification;
 use App\Http\Controllers\AdvancedChatController;
 use App\Http\Controllers\SendMessageController;
+use App\Models\AdvancedChat;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,6 +28,10 @@ Route::get('/chat', function() {
 });
 
 Route::get('/advanced-chat', [AdvancedChatController::class, 'index']);
+Route::get('/advanced-chat/send-message/{name}/{message}/{event}', [AdvancedChatController::class, 'send_message']);
+Route::get('/advanced-chat/get-messages/{event}', [AdvancedChatController::class, 'get_messages']);
+
+Route::post('/pusher/auth', [AdvancedChatController::class, 'pusher_auth']);
 
 
 /////////////////////////////////////////////
